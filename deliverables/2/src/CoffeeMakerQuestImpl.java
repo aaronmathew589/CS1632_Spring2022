@@ -3,7 +3,9 @@ import java.util.*;
 public class CoffeeMakerQuestImpl implements CoffeeMakerQuest {
 
 	// TODO: Add more member variables and methods as needed.
-	
+	Player p = new Player();
+	List<Room> roomList = new ArrayList<Room>();
+	Room curr = null;
 	CoffeeMakerQuestImpl() {
 		// TODO
 	}
@@ -25,6 +27,7 @@ public class CoffeeMakerQuestImpl implements CoffeeMakerQuest {
 	 */
 	public void setPlayer(Player p) {
 		// TODO
+		this.p = p;
 	}
 	
 	/**
@@ -36,6 +39,11 @@ public class CoffeeMakerQuestImpl implements CoffeeMakerQuest {
 	 */
 	public boolean addFirstRoom(Room room) {
 		// TODO
+		if(room != null|| roomList.isEmpty() == true) {
+			roomList.add(room);
+			return true;
+		}
+		
 		return false;
 	}
 
@@ -56,7 +64,18 @@ public class CoffeeMakerQuestImpl implements CoffeeMakerQuest {
 	 */
 	public boolean addRoomAtNorth(Room room, String northDoor, String southDoor) {
 		// TODO
-		return false;
+		if(northDoor == null || southDoor == null || room == null) {
+			return false;
+		}
+		if(roomList.isEmpty() == true) {
+			return false;
+		}
+		for(int i = 0; i<roomList.size(); i++) {
+			if(room.getAdjective() == roomList.get(i).getAdjective() || room.getFurnishing() == roomList.get(i).getFurnishing()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -67,7 +86,8 @@ public class CoffeeMakerQuestImpl implements CoffeeMakerQuest {
 	 */ 
 	public Room getCurrentRoom() {
 		// TODO
-		return null;
+		
+		return curr;
 	}
 	
 	/**
